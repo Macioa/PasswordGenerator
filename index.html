@@ -87,7 +87,7 @@ function runGenerator(){
     if (document.getElementById('Numbers').checked)
         charValues = charValues.concat(returnCharValues('0','9'));
     if (document.getElementById('Symbols').checked)
-        charValues = charValues.concat(returnCharValues('!','+'));
+        charValues = charValues.concat(returnCharValues('!',')'));
     
     var d2 = new Date().getTime()%10;
     var t = d1+d2;
