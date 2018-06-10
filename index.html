@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <title>
+        Password Generator
+    </title>
+    <form id="inputform" action="function(){test();}">
+        <input type="checkbox" id="Lowercase">
+        <input type="checkbox" id="Uppercase">
+        <input type="checkbox" id="Symbols">
+        <input type="checkbox" id="Numbers">
+        <input type="number" id="Numchars">
+        <input type="submit" id="Submit">
+    </form>
+</html>
+
+
+
+
+
+<script>
+function test(){
+    alert("clicked");
+}
+
+function shuffleCards(deck, numShuffles = 3){ //simulates the shuffling of a deck of cards
+    console.log(numShuffles);
+    if (numShuffles>1)
+        deck = shuffleCards(deck, numShuffles-1);
+    var splitIndex = Math.floor(deck.length/2)-1;
+    var part1 = deck.slice(0,splitIndex);
+    var part2 = deck.slice(splitIndex+1,deck.length-1)
+    var newDeck = []
+    while (part1.length||part2.length){
+        var coin = Math.floor(Math.random()*2);
+        if (coin&&part1.length)
+            newDeck.push(part1.pop(0));
+        else if (part2.length)
+            newDeck.push(part2.pop(0));
+    }
+    return newDeck;
+}
+</script>
