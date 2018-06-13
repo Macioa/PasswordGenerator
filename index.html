@@ -57,9 +57,9 @@ function initPage(){
 }
 
 function labelChecksDOM(){//find all checkboxes and provide labels and default settings
-    var list = document.querySelectorAll( 'input[type=checkbox]' );
-    for (var item of list) {
-        var label = document.createElement("LABEL");
+    let list = document.querySelectorAll( 'input[type=checkbox]' );
+    for (item of list) {
+        let label = document.createElement("LABEL");
         label.textContent=item.id;
         label.htmlFor = item;
         item.after(label);
@@ -68,14 +68,14 @@ function labelChecksDOM(){//find all checkboxes and provide labels and default s
 }
 
 function setResultWidthDOM(){//set resultbox width to match form width. Since form width is driven by content, can't use css without changing page layout. 
-    var activeWidth = document.getElementById('inputform').offsetWidth;
+    let activeWidth = document.getElementById('inputform').offsetWidth;
     document.getElementById('Result').setAttribute("style","width:"+activeWidth+"px")
 }
 
 function runGenerator(){
-    var d1 = new Date().getTime()%10;
+    let d1 = new Date().getTime()%10;
 
-    var charValues = [], result = "";
+    let charValues = [], result = "";
 
     if (document.getElementById('Lowercase').checked)
         charValues = charValues.concat(returnCharValues('a','z'));
@@ -86,28 +86,28 @@ function runGenerator(){
     if (document.getElementById('Symbols').checked)
         charValues = charValues.concat(returnCharValues('!','+'));
     
-    var d2 = new Date().getTime()%10;
-    var t = d1+d2;
+    let d2 = new Date().getTime()%10;
+    let t = d1+d2;
     t = t-(t/2);
 
     for (i=0; i<document.getElementById('Numchars').value; i++){
-        var dev = Math.floor(Math.random()*t);
-        var ranI = Math.floor(Math.random()*charValues.length);
-        var ranI = ranI+dev;
+        let dev = Math.floor(Math.random()*t);
+        let ranI = Math.floor(Math.random()*charValues.length);
+        ranI = ranI+dev;
         if ((ranI>charValues.length)||(ranI<0))
             ranI = Math.floor(Math.random()*charValues.length);
         result+=String.fromCharCode(charValues[ranI]);
     }
 
-    var d3 = new Date().getTime()%10;
+    let d3 = new Date().getTime()%10;
 
-    var sArray = shuffle(result.split(""),d1+d2+d3);
+    let sArray = shuffle(result.split(""),d1+d2+d3);
 
     result = ""; 
     sArray.forEach(char=>result+=char);
 
 
-    var resultTextBox = document.getElementById('Result');
+    let resultTextBox = document.getElementById('Result');
     //displayInNewWindow(result);
     resultTextBox.value = result;
     resultTextBox.select();
@@ -125,7 +125,7 @@ function displayInNewWindow(resultString){
     const newWindow = window.open();
     newWindow.resizeTo(500,200);
     newWindow.document.write('<input type="text" class="text" id="Result">');
-    var resultTextBox = newWindow.document.getElementById('Result');
+    let resultTextBox = newWindow.document.getElementById('Result');
     resultTextBox.style.textAlign = "center";
     resultTextBox.setAttribute("style","width:"+400+"px");
     resultTextBox.value = resultString;
@@ -143,8 +143,8 @@ function displayInNewWindow(resultString){
 }
 
 function returnCharValues(startChar, endChar){
-    var array=[];
-    var i=startChar.charCodeAt(0);
+    let array=[];
+    let i=startChar.charCodeAt(0);
     while (i<=endChar.charCodeAt(0)){
         array.push(i);
         i++;
@@ -155,12 +155,12 @@ function returnCharValues(startChar, endChar){
 function shuffle(deck, numShuffles = 3){ //simulates the shuffling of a deck of cards
     if (numShuffles>1)
         deck = shuffle(deck, numShuffles-1);
-    var splitIndex = Math.floor(deck.length/2);
-    var part1 = deck.slice(0,splitIndex);
-    var part2 = deck.slice(splitIndex,deck.length)
-    var newDeck = []
+    let splitIndex = Math.floor(deck.length/2);
+    let part1 = deck.slice(0,splitIndex);
+    let part2 = deck.slice(splitIndex,deck.length)
+    let newDeck = []
     while (part1.length||part2.length){
-        var coin = Math.floor(Math.random()*2);
+        let coin = Math.floor(Math.random()*2);
         coin = ((new Date().getTime()%2)*coin)%2;
         if (coin&&part1.length)
             newDeck.push(part1.pop(0));
